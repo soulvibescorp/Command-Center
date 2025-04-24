@@ -145,17 +145,28 @@ button#logout-button:hover {
 
 .profile-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  padding: 20px;
 }
 
 .profile-card {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid #0ff;
+  border-radius: 12px;
+  padding: 15px;
+  color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  cursor: grab;
 }
+
+.profile-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 20px #0ff;
+}
+
 
 .profile-card img {
   width: 100px;
