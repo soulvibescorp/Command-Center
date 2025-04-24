@@ -87,6 +87,43 @@ function renderStarMap(spaceWeatherData) {
     scene.add(star);
   }
 
+  const crewData = [
+    { name: "Zara", role: "Engineer", status: "Active" },
+    { name: "Kiro", role: "Pilot", status: "On Mission" },
+    { name: "Mira", role: "Analyst", status: "Docked" }
+  ];
+
+  function loadCrewProfiles() {
+    const container = document.getElementById('profile-cards');
+    container.innerHTML = "";
+    crewData.forEach(member => {
+      const card = document.createElement('div');
+      card.classList.add('profile-card');
+      card.innerHTML = `
+        <h4>${member.name}</h4>
+        <p>Role: ${member.role}</p>
+        <p>Status: ${member.status}</p>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function drawStarMap() {
+    const canvas = document.getElementById('star-map');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let i = 0; i < 100; i++) {
+      ctx.beginPath();
+      ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, 1.5, 0, 2 * Math.PI);
+      ctx.fillStyle = 'white';
+      ctx.fill();
+    }
+  }
+
+  setInterval(drawStarMap, 5000);
+
   // Add a star effect based on solar flare activity
   if (spaceWeatherData && spaceWeatherData.solarFlareActivity === 'High') {
     starMaterial.color.set(0xFF0000); // Change color for solar flares
@@ -104,6 +141,47 @@ function renderStarMap(spaceWeatherData) {
   }
   animate();
 }
+
+function updateSpaceWeather() {
+  document.getElementById('solar-flare').innerText = 'Moderate Activity';
+  document.getElementById('geomagnetic').innerText = 'Kp Index: 4 (Quiet)';
+}
+setInterval(updateSpaceWeather, 10000); // every 10s
+
+function simulateSensorData() {
+  const statuses = ['All Clear', 'Anomaly Detected', 'Lifeform Scan Active', 'Radiation Spike'];
+  const reading = statuses[Math.floor(Math.random() * statuses.length)];
+  document.getElementById('sensor-status').innerText = reading;
+}
+setInterval(simulateSensorData, 4000); // every 4 seconds
+
+function searchAnalytics() {
+  const query = document.getElementById('analytics-search').value.trim();
+  if (!query) {
+    alert("Please enter a search term.");
+    return;
+  }
+  // Simulated Result Display
+  alert(`Searching analytics tools for "${query}"...`);
+  // Future: Real filter logic per panel
+}
+
+// Intel Tab Switching
+const intelTabs = document.querySelectorAll('.intel-tool-tab');
+intelTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    intelTabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.getAttribute('data-tab');
+
+    document.querySelectorAll('.intel-tab-panel').forEach(panel => {
+      panel.classList.remove('active');
+      if (panel.id === target) {
+        panel.classList.add('active');
+      }
+    });
+  });
+});
 
 // Function to Fetch Real-Time Space Weather Data
 async function fetchSpaceWeather() {
@@ -124,52 +202,35 @@ async function fetchSpaceWeather() {
   }
 }
 
+document.getElementById('logout-button').addEventListener('click', () => {
+  document.getElementById('dashboard').classList.add('hidden');
+  document.getElementById('login-screen').style.display = 'block';
+  document.getElementById('username').value = '';
+  document.getElementById('password').value = '';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  simulateSensorData();
+  updateSpaceWeather();
+  drawStarMap();
+});
+
+function login() {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value;
+
+  if (username && password) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('commander-name').innerText = username;
+    document.getElementById('dashboard').classList.remove('hidden');
+    playSound('access-sound');
+  } else {
+    alert('Access Denied: Credentials required.');
+  }
+}
+
 // Call the function to fetch space weather data
 fetchSpaceWeather();
-
-function analyzePersonality() {
-  const crewName = document.getElementById('intel-name').value;
-  if (crewName) {
-    const traits = {
-      "Curiosity": Math.random(),
-      "Risk-Taking": Math.random(),
-      "Leadership": Math.random(),
-      "Stress Resistance": Math.random()
-    };
-    const traitMatrix = document.getElementById('trait-matrix');
-    traitMatrix.innerHTML = Object.entries(traits)
-      .map(([trait, val]) => `
-        <div class="trait">
-          <strong>${trait}</strong>: ${(val * 100).toFixed(2)}%
-        </div>
-      `).join('');
-    playSound('access-sound');
-  }
-}
-
-// Function to Analyze Crew Personality (Mock)
-function analyzePersonality() {
-  const crewName = document.getElementById('intel-name').value;
-  
-  if (crewName) {
-    // Simulate an AI personality matrix (Replace with real AI or algorithm)
-    const personalityTraits = {
-      "Curiosity": Math.random(),
-      "Risk-Taking": Math.random(),
-      "Leadership": Math.random(),
-      "Stress Resistance": Math.random()
-    };
-
-    const traitMatrix = document.getElementById('trait-matrix');
-    traitMatrix.innerHTML = Object.entries(personalityTraits)
-      .map(([trait, value]) => `
-        <div class="trait">
-          <span>${trait}</span>: <span>${(value * 100).toFixed(2)}%</span>
-        </div>
-      `)
-      .join('');
-  }
-}
 
 // Initialize on Load
 window.onload = function() {
