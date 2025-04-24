@@ -36,6 +36,29 @@ function loadMockSpaceWeather() {
   document.getElementById('geomagnetic').textContent = geomagnetic[Math.floor(Math.random() * geomagnetic.length)];
 }
 
+// Function to fetch real-time space weather data
+async function fetchSpaceWeather() {
+  try {
+    const response = await fetch('https://api.open-meteo.com/space-weather?latitude=0&longitude=0'); // Placeholder API
+    const data = await response.json();
+
+    // Update UI with space weather data
+    document.getElementById('solar-flare').innerText = data.solarFlareActivity || 'Loading...';
+    document.getElementById('geomagnetic').innerText = data.geomagneticIndex || 'Loading...';
+    
+    // Update the Star Map based on the data (e.g., Solar Flare activity affecting the map)
+    renderStarMap(data);
+  } catch (error) {
+    console.error("Error fetching space weather data", error);
+    document.getElementById('solar-flare').innerText = "Error fetching data.";
+    document.getElementById('geomagnetic').innerText = "Error fetching data.";
+  }
+}
+
+// Call the function to fetch space weather data
+fetchSpaceWeather();
+
+
 // Play Sound
 function playSound(id) {
   const sound = document.getElementById(id);
