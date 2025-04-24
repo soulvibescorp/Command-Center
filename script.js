@@ -248,3 +248,23 @@ function downloadCrewLog() {
   link.download = "mission-log.json";
   link.click();
 }
+const traits = [
+  { name: "Courage", value: 82 },
+  { name: "Leadership", value: 95 },
+  { name: "Empathy", value: 76 },
+  { name: "Tactical Thinking", value: 89 }
+];
+
+function displayTraitMatrix() {
+  const matrix = document.getElementById('trait-matrix');
+  matrix.innerHTML = '';
+  traits.forEach(trait => {
+    const bar = document.createElement('div');
+    bar.className = 'trait-bar';
+    bar.innerHTML = `<span>${trait.name}</span>
+                     <div class="bar-fill" style="width:${trait.value}%">${trait.value}%</div>`;
+    matrix.appendChild(bar);
+  });
+}
+
+displayTraitMatrix();
