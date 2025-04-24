@@ -18,7 +18,7 @@
     <button onclick="downloadCrewLog()">Download Mission Log</button>
   </header>
 
-  <!-- Control Panel - Netflix style tabs -->
+  <!-- Control Panel -->
   <nav class="control-nav">
     <button class="tab" data-tab="overview">Mission Overview</button>
     <button class="tab" data-tab="intel">Behavioral Intel</button>
@@ -29,7 +29,7 @@
     <audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
   </nav>
 
-  <!-- Sensor Alerts Section -->
+  <!-- Sensor Alerts -->
   <div id="sensor-alerts">
     <h4>Sensor Readings:</h4>
     <div id="sensor-status"></div>
@@ -48,188 +48,86 @@
     </section>
 
     <section id="intel" class="panel">
-  <h3>Behavioral Intel</h3>
-  <p>Analyze behavior using real-time dashboards and AI systems</p>
+      <h3>Behavioral Intel</h3>
+      <p>Analyze behavior using real-time dashboards and AI systems</p>
 
-  <!-- Tool Tabs -->
-  <div class="intel-tab-bar">
-    <button class="intel-tool-tab active" data-tab="analytics-overview">Overview</button>
-    <button class="intel-tool-tab" data-tab="analytics-ga">Google Analytics</button>
-    <button class="intel-tool-tab" data-tab="analytics-mixpanel">Mixpanel</button>
-    <button class="intel-tool-tab" data-tab="analytics-amplitude">Amplitude</button>
-    <button class="intel-tool-tab" data-tab="analytics-hotjar">Hotjar</button>
-    <button class="intel-tool-tab" data-tab="analytics-heatmaps">Heatmaps</button>
-  </div>
+      <!-- Tool Tabs -->
+      <div class="intel-tab-bar">
+        <button class="intel-tool-tab active" data-tab="analytics-overview">Overview</button>
+        <button class="intel-tool-tab" data-tab="analytics-ga">Google Analytics</button>
+        <button class="intel-tool-tab" data-tab="analytics-mixpanel">Mixpanel</button>
+        <button class="intel-tool-tab" data-tab="analytics-amplitude">Amplitude</button>
+        <button class="intel-tool-tab" data-tab="analytics-hotjar">Hotjar</button>
+        <button class="intel-tool-tab" data-tab="analytics-heatmaps">Heatmaps</button>
+      </div>
 
-  <!-- Search Input -->
-  <div class="intel-search">
-    <input type="text" id="analytics-search" placeholder="Search user activity, campaign, event..." />
-    <button onclick="searchAnalytics()">Search</button>
-  </div>
+      <!-- Search -->
+      <div class="intel-search">
+        <input type="text" id="analytics-search" placeholder="Search user activity, campaign, event..." />
+        <button onclick="searchAnalytics()">Search</button>
+      </div>
 
-  <!-- Tool Panels -->
-  <div class="intel-tab-content">
-    <div id="analytics-overview" class="intel-tab-panel active">
-      <p>Select a tool above to begin your analysis. You can also search for metrics across all tools.</p>
-    </div>
-    
-    <div id="analytics-ga" class="intel-tab-panel">
-      <iframe src="https://analytics.google.com/analytics/web/" width="100%" height="600px"></iframe>
-    </div>
+      <!-- Tool Panels -->
+      <div class="intel-tab-content">
+        <div id="analytics-overview" class="intel-tab-panel active">
+          <p>Select a tool above to begin your analysis. You can also search for metrics across all tools.</p>
+        </div>
+        
+        <div id="analytics-ga" class="intel-tab-panel">
+          <iframe src="https://analytics.google.com/analytics/web/" width="100%" height="600px"></iframe>
+        </div>
 
-    <div id="analytics-mixpanel" class="intel-tab-panel">
-      <iframe src="https://mixpanel.com/report/" width="100%" height="600px"></iframe>
-    </div>
+        <div id="analytics-mixpanel" class="intel-tab-panel">
+          <iframe src="https://mixpanel.com/report/" width="100%" height="600px"></iframe>
+        </div>
 
-    <div id="analytics-amplitude" class="intel-tab-panel">
-      <iframe src="https://analytics.amplitude.com/" width="100%" height="600px"></iframe>
-    </div>
+        <div id="analytics-amplitude" class="intel-tab-panel">
+          <iframe src="https://analytics.amplitude.com/" width="100%" height="600px"></iframe>
+        </div>
 
-    <div id="analytics-hotjar" class="intel-tab-panel">
-      <iframe src="https://insights.hotjar.com/" width="100%" height="600px"></iframe>
-    </div>
+        <div id="analytics-hotjar" class="intel-tab-panel">
+          <iframe src="https://insights.hotjar.com/" width="100%" height="600px"></iframe>
+        </div>
 
-    <div id="analytics-heatmaps" class="intel-tab-panel">
-      <iframe src="https://insights.hotjar.com/heatmaps" width="100%" height="600px"></iframe>
-    </div>
-  </div>
-</section>
+        <div id="analytics-heatmaps" class="intel-tab-panel">
+          <iframe src="https://insights.hotjar.com/heatmaps" width="100%" height="600px"></iframe>
+        </div>
+      </div>
 
+      <!-- Personality Matrix -->
+      <div class="intel-tab-content active" id="overview-intel">
+        <h4>AI Personality Matrix</h4>
+        <div class="intel-slider">
+          <div class="intel-card">Curiosity</div>
+          <div class="intel-card">Risk-Taking</div>
+          <div class="intel-card">Leadership</div>
+          <div class="intel-card">Stress Resistance</div>
+        </div>
 
-  <!-- Tab Content -->
-  <div class="intel-tab-content active" id="overview-intel">
-    <h4>AI Personality Matrix</h4>
-    <div class="intel-slider">
-      <div class="intel-card">Curiosity</div>
-      <div class="intel-card">Risk-Taking</div>
-      <div class="intel-card">Leadership</div>
-      <div class="intel-card">Stress Resistance</div>
-    </div>
+        <h4>Skill Set Radar</h4>
+        <div class="intel-slider">
+          <div class="intel-card">Hacking</div>
+          <div class="intel-card">Piloting</div>
+          <div class="intel-card">Engineering</div>
+          <div class="intel-card">Negotiation</div>
+        </div>
 
-    <h4>Skill Set Radar</h4>
-    <div class="intel-slider">
-      <div class="intel-card">Hacking</div>
-      <div class="intel-card">Piloting</div>
-      <div class="intel-card">Engineering</div>
-      <div class="intel-card">Negotiation</div>
-    </div>
+        <h4>Recent Decisions</h4>
+        <div class="intel-slider">
+          <div class="intel-card">Initiated Protocol Delta</div>
+          <div class="intel-card">Bypassed Firewall</div>
+          <div class="intel-card">Authorized Jump Drive</div>
+          <div class="intel-card">Refused Mission Override</div>
+        </div>
 
-    <h4>Recent Decisions</h4>
-    <div class="intel-slider">
-      <div class="intel-card">Initiated Protocol Delta</div>
-      <div class="intel-card">Bypassed Firewall</div>
-      <div class="intel-card">Authorized Jump Drive</div>
-      <div class="intel-card">Refused Mission Override</div>
-    </div>
-
-    <h4>Analyze a Crew Member</h4>
-    <div class="intel-input">
-      <input type="text" id="intel-name" placeholder="Enter Crew Name..." />
-      <button onclick="analyzePersonality()">Analyze</button>
-    </div>
-    <div id="trait-matrix" class="trait-matrix"></div>
-  </div>
-
-  <div class="intel-tab-content" id="google-analytics">
-    <h4>Google Analytics</h4>
-    <!-- Embed example GA Dashboard or tutorial -->
-    <p>Use your GA4 Measurement ID and embed visual reports from GA interface or custom API visualizations.</p>
-    <code>Example Script Snippet:</code>
-    <pre>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"&gt;&lt;/script&gt;
-&lt;script&gt;
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID');
-&lt;/script&gt;</pre>
-  </div>
-
-  <div class="intel-tab-content" id="mixpanel">
-    <h4>Mixpanel Analytics</h4>
-    <pre>&lt;script type="text/javascript"&gt;
-  (function(f,b){
-    if(!b.__SV){var e,g,i,h;window.mixpanel=b;b._i=[];b.init=function(e,f,c){
-      function g(a,d){
-        var b=d.split(".");
-        2==b.length&&(a=a[b[0]],d=b[1]);
-        a[d]=function(){
-          a.push([d].concat(Array.prototype.slice.call(arguments,0)))
-        }
-      }
-      var a=b;"undefined"!==typeof c?a=b[c]=[]:c="mixpanel";
-      a.people=a.people||[];a.toString=function(a){var d="mixpanel";"mixpanel"!==c&&(d+="."+c);
-      a||(d+=" (stub)");return d};
-      a.people.toString=function(){return a.toString(1)+".people (stub)"};
-      i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
-      for(h=0;h<i.length;h++)g(a,i[h]);
-      b._i.push([e,f,c])
-    };
-    b.__SV=1.2;e=f.createElement("script");
-    e.type="text/javascript";e.async=!0;e.src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
-    g=f.getElementsByTagName("script")[0];g.parentNode.insertBefore(e,g)
-  }})(document,window.mixpanel||[]);
-  mixpanel.init("YOUR_TOKEN");
-&lt;/script&gt;</pre>
-  </div>
-
-  <div class="intel-tab-content" id="amplitude">
-    <h4>Amplitude Analytics</h4>
-    <pre>&lt;script type="text/javascript"&gt;
-  (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
-  ;r.type="text/javascript";r.async=true;
-  r.src="https://cdn.amplitude.com/libs/amplitude-8.5.0-min.gz.js";
-  r.onload=function(){
-    if(e.amplitude.runQueuedFunctions){
-      e.amplitude.runQueuedFunctions()
-    }else{
-      console.log("[Amplitude] Error: could not load SDK")
-    }
-  };
-  var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i);
-  function s(e,t){
-    e.prototype[t]=function(){
-      this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this
-    }
-  }
-  var o=function(){this._q=[];return this};
-  var a=["add","append","clearAll","prepend","set","setOnce","unset"];
-  for(var c=0;c<a.length;c++){s(o,a[c])}n.Identify=o;
-  var u=function(){this._q=[];return this};
-  var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"];
-  for(var p=0;p<l.length;p++){s(u,l[p])}n.Revenue=u;
-  var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut",
-  "setVersionName","setDomain","setDeviceId","enableTracking","setGlobalUserProperties",
-  "identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId",
-  "groupIdentify","onInit","logEventWithTimestamp","logEventWithGroups","setSessionId",
-  "resetSessionId"];
-  function v(e){
-    function t(t){
-      e[t]=function(){
-        e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))
-      }
-    }
-    for(var n=0;n<d.length;n++){t(d[n])}
-  }
-  v(n);
-  e.amplitude=n;
-})(window,document);
-
-amplitude.getInstance().init("AMPLITUDE_API_KEY");
-&lt;/script&gt;</pre>
-  </div>
-
-  <div class="intel-tab-content" id="hotjar">
-    <h4>Hotjar</h4>
-    <iframe src="https://insights.hotjar.com/sites/XXXXX/dashboard" width="100%" height="600" frameborder="0"></iframe>
-  </div>
-
-  <div class="intel-tab-content" id="heatmaps">
-    <h4>Heatmap Sample</h4>
-    <iframe src="https://example.com/embed/heatmap" width="100%" height="600" frameborder="0"></iframe>
-  </div>
-</section>
-
-
+        <h4>Analyze a Crew Member</h4>
+        <div class="intel-input">
+          <input type="text" id="intel-name" placeholder="Enter Crew Name..." />
+          <button onclick="analyzePersonality()">Analyze</button>
+        </div>
+        <div id="trait-matrix" class="trait-matrix"></div>
+      </div>
+    </section>
 
     <section id="settings" class="panel">
       <h3>System Settings</h3>
@@ -251,14 +149,17 @@ amplitude.getInstance().init("AMPLITUDE_API_KEY");
 <canvas id="visualizer"></canvas>
 
 <script>
-// Initialize the dashboard
 function initializeDashboard() {
-  const commanderName = "Commander X";  // This should come from a real authentication system
+  const commanderName = "Commander X"; // This should come from real auth
   document.getElementById('commander-name').innerText = commanderName;
   document.getElementById('dashboard').classList.remove('hidden');
 }
 
-// Handle Tab Navigation
+function playSound(id) {
+  const sound = document.getElementById(id);
+  if (sound) sound.play();
+}
+
 const tabs = document.querySelectorAll('.tab');
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
@@ -273,15 +174,13 @@ tabs.forEach(tab => {
   });
 });
 
-// Handle Log Out
 document.getElementById('logout-button').addEventListener('click', () => {
   alert('Logging out...');
-  // Add real logout logic here
+  // Real logout logic here
 });
 
-// Handle Crew Log Download
 function downloadCrewLog() {
-  const log = 'Mission Log...';  // Replace with real data
+  const log = 'Mission Log...'; // Replace with real data
   const blob = new Blob([log], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
@@ -289,103 +188,18 @@ function downloadCrewLog() {
   link.click();
 }
 
-// Handle AI Personality Analysis
-function analyzePersonality() {
-  const crewName = document.getElementById('intel-name').value;
-  if (crewName) {
-    // Simulate AI Personality Matrix for now
-    const traits = ['Curiosity', 'Risk-Taking', 'Leadership', 'Stress Resistance'];
-    const traitMatrix = document.getElementById('trait-matrix');
-    traitMatrix.innerHTML = traits.map(trait => `<div class="trait">${trait}</div>`).join('');
-    playSound('access-sound');
-  }
-}
-
-// Display Sensor Data
-function updateSensorData() {
-  const sensorData = "Sensor systems online.";  // Simulated data
-  document.getElementById('sensor-status').innerText = sensorData;
-}
-
-// Display Space Weather
-function updateSpaceWeather() {
-  // Simulate space weather data
-  document.getElementById('solar-flare').innerText = "High";
-  document.getElementById('geomagnetic').innerText = "Storm Level 3";
-  
-  // Star Map (simple placeholder, can be enhanced)
-  const canvas = document.getElementById('star-map');
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);  // Just a placeholder
-}
-
-// Helper function to play sound
-function playSound(id) {
-  const sound = document.getElementById(id);
-  sound.play();
-}
-
-// Initialize visualizer (optional)
-function initializeVisualizer() {
-  const canvas = document.getElementById('visualizer');
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = 'green';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);  // Placeholder for visualizer
-}
-
-// Call the initialization functions
-initializeDashboard();
-updateSensorData();
-updateSpaceWeather();
-initializeVisualizer();
-</script>
-    <script>
-  // Behavioral Intel Tab Handler
-  const intelTabButtons = document.querySelectorAll('.intel-tab-button');
-  const intelTabContents = document.querySelectorAll('.intel-tab-content');
-
-  intelTabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tabId = btn.getAttribute('data-intel-tab');
-
-      intelTabButtons.forEach(b => b.classList.remove('active'));
-      intelTabContents.forEach(c => c.classList.remove('active'));
-
-      btn.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
-    });
-  });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-// === Tab Switching Logic ===
-document.querySelectorAll(".intel-tool-tab").forEach(button => {
-  button.addEventListener("click", () => {
-    const target = button.dataset.tab;
-
-    // Remove active from all tabs and panels
-    document.querySelectorAll(".intel-tool-tab").forEach(btn => btn.classList.remove("active"));
-    document.querySelectorAll(".intel-tab-panel").forEach(panel => panel.classList.remove("active"));
-
-    // Activate selected tab and panel
-    button.classList.add("active");
-    document.getElementById(target).classList.add("active");
-  });
-});
-
-// === Simple Search Logic (Future AI Integration Placeholder) ===
 function searchAnalytics() {
-  const query = document.getElementById("analytics-search").value.trim().toLowerCase();
-  if (!query) {
-    alert("Please enter a search term.");
-    return;
-  }
-
-  // Mock response (replace this with real filtering or AI assistant search)
-  alert("Searching for: " + query + "\n\n[Note: Smart analytics search coming soon!]");
+  const query = document.getElementById('analytics-search').value;
+  alert('Searching analytics for: ' + query); // Replace with actual logic
 }
-</script>
 
+function analyzePersonality() {
+  const name = document.getElementById('intel-name').value;
+  const matrix = document.getElementById('trait-matrix');
+  matrix.innerHTML = `<p>Analyzing ${name}... (Simulation)</p>`; // Replace with real AI logic
+}
+
+window.onload = initializeDashboard;
+</script>
 </body>
 </html>
