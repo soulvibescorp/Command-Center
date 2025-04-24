@@ -204,3 +204,25 @@ function displayCrewProfiles() {
 // Optional: Run this instead of renderProfiles() on load if switching data source
 // window.onload = displayCrewProfiles;
 window.onload = renderProfiles;
+
+// Add random alert system
+function randomAlert() {
+  const statuses = [
+    "🛑 Cosmic radiation spike!",
+    "✅ All systems nominal.",
+    "⚠️ Wormhole proximity alert!",
+    "🔍 Scanning unknown object...",
+    "📡 Signal interference detected."
+  ];
+
+  const sensor = document.getElementById("sensor-status");
+  const alert = statuses[Math.floor(Math.random() * statuses.length)];
+
+  sensor.innerHTML = `<p>${alert}</p>`;
+  sensor.classList.add("flashing");
+
+  setTimeout(() => sensor.classList.remove("flashing"), 1500);
+}
+
+// Simulate alert every 10 seconds
+setInterval(randomAlert, 10000);
