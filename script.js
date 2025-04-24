@@ -113,6 +113,31 @@ function renderProfiles() {
   saveProfiles();
 }
 
+const crewMembers = [
+  { name: "Zara Voss", role: "Tactical Lead", trait: "Strategist", photo: "assets/crew1.png" },
+  { name: "Kai Orion", role: "Pilot", trait: "Fearless", photo: "assets/crew2.png" },
+  { name: "Nova Reed", role: "Engineer", trait: "Innovator", photo: "assets/crew3.png" }
+];
+
+function displayCrew() {
+  const container = document.getElementById("profile-cards");
+  container.innerHTML = "";
+  crewMembers.forEach(member => {
+    const card = document.createElement("div");
+    card.className = "crew-card floating";
+    card.innerHTML = `
+      <img src="${member.photo}" alt="${member.name}" class="hologram-img" />
+      <h4>${member.name}</h4>
+      <p>${member.role}</p>
+      <span class="trait">${member.trait}</span>
+    `;
+    container.appendChild(card);
+  });
+}
+
+displayCrew();
+
+
 // Form submission for adding crew
 document.getElementById("crewForm").addEventListener("submit", function (e) {
   e.preventDefault();
