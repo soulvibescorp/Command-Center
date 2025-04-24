@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  color: #00f6ff;
+  overflow: hidden;
+  background: black;
+}
+
+#bg-video {
+  position: fixed;
+  top: 0; left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+  object-fit: cover;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-panel {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #00f6ff;
+  padding: 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.login-panel input,
+.login-panel button {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+}
+
+.login-panel input {
+  background: #111;
+  color: #0ff;
+  border: 1px solid #0ff;
+}
+
+.login-panel button {
+  background: #00f6ff;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-panel button:hover {
+  background: #0ff;
+}
+
+.error-message {
+  color: #ff4d4d;
+  margin-top: 10px;
+}
+
+.dashboard-container {
+  display: none;
+  padding: 20px;
+}
+
+.dashboard-container.visible {
+  display: block;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #0ff;
+  margin-bottom: 20px;
+}
+
+.logo {
+  height: 50px;
+}
+
+.control-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.control-nav .tab {
+  background: transparent;
+  border: 1px solid #0ff;
+  padding: 10px 20px;
+  color: #0ff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.control-nav .tab:hover {
+  background-color: #0ff;
+  color: black;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.profile-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.profile-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border: 1px solid #0ff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.profile-card h4 {
+  margin-bottom: 10px;
+  color: #0ff;
+}
+
+.profile-card p {
+  font-size: 14px;
+  color: #ccc;
+}
