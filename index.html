@@ -305,6 +305,23 @@ updateSensorData();
 updateSpaceWeather();
 initializeVisualizer();
 </script>
+    <script>
+  // Behavioral Intel Tab Handler
+  const intelTabButtons = document.querySelectorAll('.intel-tab-button');
+  const intelTabContents = document.querySelectorAll('.intel-tab-content');
+
+  intelTabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.getAttribute('data-intel-tab');
+
+      intelTabButtons.forEach(b => b.classList.remove('active'));
+      intelTabContents.forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
 </body>
