@@ -36,15 +36,14 @@
     <button id="logout-button">Logout</button>
   </header>
 
-  <!-- Control Panel -->
+  <!-- Control Panel - Netflix style tabs -->
   <nav class="control-nav">
     <button class="tab" data-tab="overview">Mission Overview</button>
     <button class="tab" data-tab="intel">Behavioral Intel</button>
     <button class="tab" data-tab="profiles">Crew Profiles</button>
     <button class="tab" data-tab="settings">System Settings</button>
     <audio id="beep-sound" src="assets/click-beep.mp3" preload="auto"></audio>
-<audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
-
+    <audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
   </nav>
 
   <!-- Main Panels -->
@@ -53,7 +52,7 @@
       <h3>Mission Status</h3>
       <p>Systems nominal. Galaxy scanning in progress...</p>
     </section>
-    
+
     <section id="intel" class="panel">
       <h3>Behavioral Intel</h3>
       <p>Tracking personality traits and decision analysis.</p>
@@ -72,7 +71,8 @@
   </main>
 </div>
 
-  <div id="crew-register" class="tab-panel">
+<!-- Crew Registration Form -->
+<div id="crew-register" class="tab-panel">
   <h3>Register New Crew Member</h3>
   <form id="crewForm">
     <input type="text" id="crew-name" placeholder="Name" required />
@@ -84,9 +84,8 @@
   <div id="profile-cards"></div>
 </div>
 
-
 <script src="script.js"></script>
-  <canvas id="galaxy-bg"></canvas>
+<canvas id="galaxy-bg"></canvas>
 <script src="scripts/stars.js"></script>
 
 </body>
