@@ -64,8 +64,16 @@
       <h3>System Settings</h3>
       <p>API Integration Coming Soon...</p>
     </section>
+    <section id="space-weather" class="panel">
+  <h3>Space Weather & Star Map</h3>
+  <div class="weather-info">
+    <p><strong>Solar Flare Activity:</strong> <span id="solar-flare">Loading...</span></p>
+    <p><strong>Geomagnetic Index:</strong> <span id="geomagnetic">Loading...</span></p>
+  </div>
+  <canvas id="star-map" width="600" height="400"></canvas>
+</section>
+    <button class="tab" data-tab="space-weather">Space Weather</button>
   </main>
 </div>
-
 <!-- Adding the CryptoJS Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
