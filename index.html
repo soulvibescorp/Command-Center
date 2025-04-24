@@ -49,17 +49,52 @@
 
     <section id="intel" class="panel">
   <h3>Behavioral Intel</h3>
-  <p>Analyzing traits, skills, and decisions via AI Core Systems</p>
+  <p>Analyze behavior using real-time dashboards and AI systems</p>
 
-  <!-- Tab Navigation -->
-  <div class="intel-tabs">
-    <button class="intel-tab-button active" data-intel-tab="overview-intel">Overview</button>
-    <button class="intel-tab-button" data-intel-tab="google-analytics">Google Analytics</button>
-    <button class="intel-tab-button" data-intel-tab="mixpanel">Mixpanel</button>
-    <button class="intel-tab-button" data-intel-tab="amplitude">Amplitude</button>
-    <button class="intel-tab-button" data-intel-tab="hotjar">Hotjar</button>
-    <button class="intel-tab-button" data-intel-tab="heatmaps">Heatmaps</button>
+  <!-- Tool Tabs -->
+  <div class="intel-tab-bar">
+    <button class="intel-tool-tab active" data-tab="analytics-overview">Overview</button>
+    <button class="intel-tool-tab" data-tab="analytics-ga">Google Analytics</button>
+    <button class="intel-tool-tab" data-tab="analytics-mixpanel">Mixpanel</button>
+    <button class="intel-tool-tab" data-tab="analytics-amplitude">Amplitude</button>
+    <button class="intel-tool-tab" data-tab="analytics-hotjar">Hotjar</button>
+    <button class="intel-tool-tab" data-tab="analytics-heatmaps">Heatmaps</button>
   </div>
+
+  <!-- Search Input -->
+  <div class="intel-search">
+    <input type="text" id="analytics-search" placeholder="Search user activity, campaign, event..." />
+    <button onclick="searchAnalytics()">Search</button>
+  </div>
+
+  <!-- Tool Panels -->
+  <div class="intel-tab-content">
+    <div id="analytics-overview" class="intel-tab-panel active">
+      <p>Select a tool above to begin your analysis. You can also search for metrics across all tools.</p>
+    </div>
+    
+    <div id="analytics-ga" class="intel-tab-panel">
+      <iframe src="https://analytics.google.com/analytics/web/" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="analytics-mixpanel" class="intel-tab-panel">
+      <iframe src="https://mixpanel.com/report/" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="analytics-amplitude" class="intel-tab-panel">
+      <iframe src="https://analytics.amplitude.com/" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="analytics-hotjar" class="intel-tab-panel">
+      <iframe src="https://insights.hotjar.com/" width="100%" height="600px"></iframe>
+    </div>
+
+    <div id="analytics-heatmaps" class="intel-tab-panel">
+      <iframe src="https://insights.hotjar.com/heatmaps" width="100%" height="600px"></iframe>
+    </div>
+  </div>
+</section>
+
 
   <!-- Tab Content -->
   <div class="intel-tab-content active" id="overview-intel">
