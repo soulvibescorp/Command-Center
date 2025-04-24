@@ -127,6 +127,26 @@ async function fetchSpaceWeather() {
 // Call the function to fetch space weather data
 fetchSpaceWeather();
 
+function analyzePersonality() {
+  const crewName = document.getElementById('intel-name').value;
+  if (crewName) {
+    const traits = {
+      "Curiosity": Math.random(),
+      "Risk-Taking": Math.random(),
+      "Leadership": Math.random(),
+      "Stress Resistance": Math.random()
+    };
+    const traitMatrix = document.getElementById('trait-matrix');
+    traitMatrix.innerHTML = Object.entries(traits)
+      .map(([trait, val]) => `
+        <div class="trait">
+          <strong>${trait}</strong>: ${(val * 100).toFixed(2)}%
+        </div>
+      `).join('');
+    playSound('access-sound');
+  }
+}
+
 // Function to Analyze Crew Personality (Mock)
 function analyzePersonality() {
   const crewName = document.getElementById('intel-name').value;
