@@ -1,7 +1,3 @@
-<!-- Include CryptoJS for AES encryption -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-
-<script>
 // Dummy login
 const USER = { username: "commander", password: "galaxy123" };
 
@@ -133,16 +129,15 @@ document.getElementById("crewForm").addEventListener("submit", function (e) {
       trait,
       photo: reader.result || null
     };
-    crewProfiles.push(newProfile);
-    saveProfiles();
-    renderProfiles();
+    saveCrewProfile(newProfile);
+    displayCrewProfiles();
     e.target.reset();
   };
 
   if (photoInput.files.length > 0) {
     reader.readAsDataURL(photoInput.files[0]);
   } else {
-    reader.onloadend(); // Run directly with no photo
+    reader.onloadend();
   }
 });
 
@@ -180,28 +175,29 @@ function makeCardsDraggable() {
   });
 }
 
-// Save Crew Profile with Encryption
+// Save crew profile with encryption
 function saveCrewProfile(profile) {
-  let crew = JSON.parse(localStorage.getItem("crew")) || [];
+  let crew = [];
+  const encrypted = localStorage.getItem("crew");
+  if (encrypted) {
+    const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
+    const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+    crew = JSON.parse(decryptedData);
+  }
   crew.push(profile);
-
-  // Encrypt
   const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(crew), "GalacticSecret").toString();
   localStorage.setItem("crew", ciphertext);
 }
 
-// Display Crew Profiles with Decryption
+// Display crew profiles with decryption
 function displayCrewProfiles() {
   const encrypted = localStorage.getItem("crew");
   if (!encrypted) return;
-
   const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
   const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
   const crew = JSON.parse(decryptedData);
-
   const container = document.getElementById("profile-cards");
   container.innerHTML = "";
-
   crew.forEach(member => {
     const card = document.createElement("div");
     card.className = "profile-card";
@@ -216,8 +212,7 @@ function displayCrewProfiles() {
 }
 
 // Optional: Run this instead of renderProfiles() on load if switching data source
-// window.onload = displayCrewProfiles;
-window.onload = renderProfiles;
+window.onload = displayCrewProfiles;
 
 // Add random alert system
 function randomAlert() {
@@ -240,4 +235,3 @@ function randomAlert() {
 
 // Simulate alert every 10 seconds
 setInterval(randomAlert, 10000);
-</script>
