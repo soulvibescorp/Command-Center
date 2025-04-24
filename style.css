@@ -36,6 +36,22 @@ body {
   color: #fff;
 }
 
+.profile-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #0ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px;
+  cursor: grab;
+  box-shadow: 0 0 10px cyan;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+.profile-card:active {
+  cursor: grabbing;
+  transform: scale(1.03);
+}
+
 .login-panel {
   background: rgba(0, 0, 0, 0.7);
   padding: 30px;
