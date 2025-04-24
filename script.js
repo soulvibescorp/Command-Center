@@ -151,7 +151,6 @@ document.getElementById("crewForm").addEventListener("submit", function (e) {
   const role = document.getElementById("crew-role").value;
   const trait = document.getElementById("crew-trait").value;
   const photoInput = document.getElementById("crew-photo");
-
   const reader = new FileReader();
   reader.onloadend = () => {
     const newProfile = {
@@ -172,4 +171,16 @@ document.getElementById("crewForm").addEventListener("submit", function (e) {
     // If no photo, use default
     reader.onloadend();
   }
+});
+
+const cards = document.querySelectorAll('.profile-card');
+cards.forEach(card => {
+  card.setAttribute('draggable', true);
+  card.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', card.id);
+    card.style.opacity = '0.5';
+  });
+  card.addEventListener('dragend', () => {
+    card.style.opacity = '1';
+  });
 });
