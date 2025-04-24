@@ -1,92 +1,83 @@
-<!-- Dashboard -->
-<div class="dashboard-container hidden" id="dashboard">
-  <header>
-    <img src="assets/logo.svg" alt="Galactic Logo" class="logo" />
-    <h2>Welcome, Commander <span id="commander-name"></span></h2>
-    <button id="logout-button">Logout</button>
-    <button onclick="downloadCrewLog()">Download Mission Log</button>
-  </header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galactic Command Dashboard</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS for styling -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script> <!-- CryptoJS for encryption -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script> <!-- For visual effects -->
+</head>
+<body>
+  <!-- Dashboard -->
+  <div class="dashboard-container" id="dashboard">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <img src="assets/logo.svg" alt="Galactic Logo" class="logo" />
+      <h2>Welcome, Commander <span id="commander-name">Unknown</span></h2>
+      <button id="logout-button" class="btn">Logout</button>
+      <button class="btn" onclick="downloadCrewLog()">Download Mission Log</button>
+    </header>
 
-  <!-- Control Panel - Netflix style tabs -->
-  <nav class="control-nav">
-    <button class="tab" data-tab="overview">Mission Overview</button>
-    <button class="tab" data-tab="intel">Behavioral Intel</button>
-    <button class="tab" data-tab="profiles">Crew Profiles</button>
-    <button class="tab" data-tab="settings">System Settings</button>
-    <audio id="beep-sound" src="assets/click-beep.mp3" preload="auto"></audio>
-    <audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
-  </nav>
+    <!-- Control Panel - Netflix style tabs -->
+    <nav class="control-nav">
+      <button class="tab" data-tab="overview">Mission Overview</button>
+      <button class="tab" data-tab="intel">Behavioral Intel</button>
+      <button class="tab" data-tab="profiles">Crew Profiles</button>
+      <button class="tab" data-tab="settings">System Settings</button>
+      <button class="tab" data-tab="space-weather">Space Weather</button>
+      <audio id="beep-sound" src="assets/click-beep.mp3" preload="auto"></audio>
+      <audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
+    </nav>
 
-  <!-- Sensor Alerts Section -->
-  <div id="sensor-alerts">
-    <h4>Sensor Readings:</h4>
-    <div id="sensor-status"></div>
-  </div>
+    <!-- Main Panels -->
+    <main>
+      <!-- Mission Overview -->
+      <section id="overview" class="panel active">
+        <h3>Mission Status</h3>
+        <p>Systems nominal. Galaxy scanning in progress...</p>
+      </section>
 
-  <!-- Main Panels -->
-  <main>
-    <section id="overview" class="panel active">
-      <h3>Mission Status</h3>
-      <p>Systems nominal. Galaxy scanning in progress...</p>
-    </section>
-<section id="profiles" class="panel">
-  <h3>Crew Member Profiles</h3>
-  <div id="profile-cards" class="profile-grid">
-    <!-- Crew Cards will be generated here -->
-  </div>
-</section>
-    <section id="intel" class="panel">
-      <h3>Behavioral Intel</h3>
-      <p>Tracking personality traits and decision analysis.</p>
-      <ul id="intel-list"></ul>
-      <div class="intel-form">
-        <input type="text" id="intel-name" placeholder="Crew Name" />
-        <button onclick="analyzePersonality()">Analyze</button>
-      </div>
-      <ul id="intel-list"></ul>
+      <!-- Behavioral Intel -->
       <section id="intel" class="panel">
-  <h3>Behavioral Intel</h3>
-  <p>Tracking personality traits and decision analysis via AI Core</p>
-  <div id="ai-analysis">
-    <h4>AI Personality Matrix</h4>
-    <div class="trait-matrix" id="trait-matrix"></div>
+        <h3>Behavioral Intel</h3>
+        <p>Tracking personality traits and decision analysis via AI Core</p>
+        <div id="ai-analysis">
+          <h4>AI Personality Matrix</h4>
+          <div class="trait-matrix" id="trait-matrix"></div>
+        </div>
+      </section>
+
+      <!-- Crew Profiles -->
+      <section id="profiles" class="panel">
+        <h3>Crew Member Profiles</h3>
+        <div id="profile-cards" class="profile-grid">
+          <!-- Crew Cards will be dynamically added here -->
+        </div>
+      </section>
+
+      <!-- System Settings -->
+      <section id="settings" class="panel">
+        <h3>System Settings</h3>
+        <p>API Integration Coming Soon...</p>
+      </section>
+
+      <!-- Space Weather -->
+      <section id="space-weather" class="panel">
+        <h3>Space Weather & Star Map</h3>
+        <div class="weather-info">
+          <p><strong>Solar Flare Activity:</strong> <span id="solar-flare">Loading...</span></p>
+          <p><strong>Geomagnetic Index:</strong> <span id="geomagnetic">Loading...</span></p>
+        </div>
+        <canvas id="star-map" width="600" height="400"></canvas>
+      </section>
+    </main>
   </div>
-</section>
 
-    </section>
+  <!-- Sound Effects -->
+  <audio id="beep-sound" src="assets/click-beep.mp3" preload="auto"></audio>
+  <audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
 
-    <section id="profiles" class="panel">
-      <h3>Crew Member Profiles</h3>
-      <div id="profile-cards" class="profile-grid"></div>
-    </section>
-
-    <section id="settings" class="panel">
-      <h3>System Settings</h3>
-      <p>API Integration Coming Soon...</p>
-    </section>
-    <section id="space-weather" class="panel">
-  <h3>Space Weather & Star Map</h3>
-  <div class="weather-info">
-    <p><strong>Solar Flare Activity:</strong> <span id="solar-flare">Loading...</span></p>
-    <p><strong>Geomagnetic Index:</strong> <span id="geomagnetic">Loading...</span></p>
-  </div>
-  <canvas id="star-map" width="600" height="400"></canvas>
-</section>
-    <button class="tab" data-tab="space-weather">Space Weather</button>
-  </main>
-</div>
-<!-- Tabs -->
-<div class="tab" data-tab="space-weather">Space Weather</div>
-
-<!-- Panels -->
-<div id="space-weather" class="panel">
-  <p>Solar Flare Activity: <span id="solar-flare">--</span></p>
-  <p>Geomagnetic Storm Level: <span id="geomagnetic">--</span></p>
-  <canvas id="star-map" style="width: 100%; height: 300px;"></canvas>
-</div>
-
-<!-- Visualizer -->
-<canvas id="visualizer"></canvas>
-
-<!-- Adding the CryptoJS Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="script.js"></script> <!-- Link to external JS for app logic -->
+</body>
+</html>
