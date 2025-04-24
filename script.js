@@ -175,3 +175,32 @@ function makeCardsDraggable() {
     card.ondragstart = () => false;
   });
 }
+
+// Extra functions added from your snippet:
+function saveCrewProfile(profile) {
+  let crew = JSON.parse(localStorage.getItem("crew")) || [];
+  crew.push(profile);
+  localStorage.setItem("crew", JSON.stringify(crew));
+}
+
+function displayCrewProfiles() {
+  const crew = JSON.parse(localStorage.getItem("crew")) || [];
+  const container = document.getElementById("profile-cards");
+  container.innerHTML = "";
+
+  crew.forEach(member => {
+    const card = document.createElement("div");
+    card.className = "profile-card";
+    card.innerHTML = `
+      ${member.photo ? `<img src="${member.photo}" alt="Crew Photo"/>` : ""}
+      <h4>${member.name}</h4>
+      <p><strong>Role:</strong> ${member.role}</p>
+      <p><strong>Trait:</strong> ${member.trait}</p>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Optional: Run this instead of renderProfiles() on load if switching data source
+// window.onload = displayCrewProfiles;
+window.onload = renderProfiles;
