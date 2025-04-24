@@ -203,3 +203,37 @@ tabs.forEach(tab => {
     document.getElementById('beep-sound').play();
   });
 });
+
+function makeCardsDraggable() {
+  const cards = document.querySelectorAll('.profile-card');
+  cards.forEach(card => {
+    card.onmousedown = function (e) {
+      let shiftX = e.clientX - card.getBoundingClientRect().left;
+      let shiftY = e.clientY - card.getBoundingClientRect().top;
+
+      card.style.position = 'absolute';
+      card.style.zIndex = 1000;
+      document.body.append(card);
+
+      function moveAt(pageX, pageY) {
+        card.style.left = pageX - shiftX + 'px';
+        card.style.top = pageY - shiftY + 'px';
+      }
+
+      moveAt(e.pageX, e.pageY);
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      card.onmouseup = function () {
+        document.removeEventListener('mousemove', onMouseMove);
+        card.onmouseup = null;
+      };
+    };
+
+    card.ondragstart = () => false;
+  });
+}
