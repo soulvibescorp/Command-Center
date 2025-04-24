@@ -18,6 +18,34 @@ const commanderName = document.getElementById("commander-name");
 const logoutBtn = document.getElementById("logout-button");
 const tabs = document.querySelectorAll(".tab");
 const panels = document.querySelectorAll(".panel");
+const beepSound = document.getElementById("beep-sound");
+const accessSound = document.getElementById("access-sound");
+
+function playBeep() {
+  beepSound.currentTime = 0;
+  beepSound.play();
+}
+
+function playAccess() {
+  accessSound.currentTime = 0;
+  accessSound.play();
+}
+
+// Add sound on tab click
+tabs.forEach(tab => {
+  tab.addEventListener("click", () => {
+    panels.forEach(p => p.classList.remove("active"));
+    document.getElementById(tab.dataset.tab).classList.add("active");
+    playBeep();
+  });
+});
+
+// Login success
+if (user === USER.username && pass === USER.password) {
+  playAccess();
+  ...
+}
+
 
 // Login logic
 loginForm.addEventListener("submit", (e) => {
