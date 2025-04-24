@@ -48,17 +48,58 @@
     </section>
 
     <section id="intel" class="panel">
-      <h3>Behavioral Intel</h3>
-      <p>Tracking personality traits and decision analysis via AI Core</p>
-      <div id="ai-analysis">
-        <h4>AI Personality Matrix</h4>
-        <div class="trait-matrix" id="trait-matrix"></div>
+  <h3>Behavioral Intel</h3>
+  <p>Analyzing traits, skills, and decisions via AI Core Systems</p>
+
+  <!-- Netflix-style Container -->
+  <div class="intel-dashboard">
+
+    <!-- Section 1: Personality Matrix -->
+    <div class="intel-row">
+      <h4>AI Personality Matrix</h4>
+      <div class="intel-slider">
+        <div class="intel-card">Curiosity</div>
+        <div class="intel-card">Risk-Taking</div>
+        <div class="intel-card">Leadership</div>
+        <div class="intel-card">Stress Resistance</div>
       </div>
-      <div class="intel-form">
-        <input type="text" id="intel-name" placeholder="Crew Name" />
+    </div>
+
+    <!-- Section 2: Skill Breakdown -->
+    <div class="intel-row">
+      <h4>Skill Set Radar</h4>
+      <div class="intel-slider">
+        <div class="intel-card">Hacking</div>
+        <div class="intel-card">Piloting</div>
+        <div class="intel-card">Engineering</div>
+        <div class="intel-card">Negotiation</div>
+      </div>
+    </div>
+
+    <!-- Section 3: Decision Logs -->
+    <div class="intel-row">
+      <h4>Recent Decisions</h4>
+      <div class="intel-slider">
+        <div class="intel-card">Initiated Protocol Delta</div>
+        <div class="intel-card">Bypassed Firewall</div>
+        <div class="intel-card">Authorized Jump Drive</div>
+        <div class="intel-card">Refused Mission Override</div>
+      </div>
+    </div>
+
+    <!-- Section 4: Intel Input -->
+    <div class="intel-row">
+      <h4>Analyze a Crew Member</h4>
+      <div class="intel-input">
+        <input type="text" id="intel-name" placeholder="Enter Crew Name..." />
         <button onclick="analyzePersonality()">Analyze</button>
       </div>
-    </section>
+      <div id="trait-matrix" class="trait-matrix"></div>
+    </div>
+
+  </div>
+</section>
+
 
     <section id="settings" class="panel">
       <h3>System Settings</h3>
