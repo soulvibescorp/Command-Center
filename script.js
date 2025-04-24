@@ -131,6 +131,20 @@ function renderProfiles() {
   saveProfiles();
 }
 
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active'));
+
+    tab.classList.add('active');
+    const targetPanel = document.getElementById(tab.dataset.tab);
+    targetPanel.classList.add('active');
+
+    document.getElementById("beep-sound").play();
+  });
+});
+
+
 document.getElementById("crewForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const name = document.getElementById("crew-name").value;
