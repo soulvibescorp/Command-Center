@@ -249,6 +249,26 @@ document.querySelectorAll('button, .tab').forEach(el => {
   });
 });
 
+function analyzePersonality() {
+  const name = document.getElementById('intel-name').value.trim();
+  if (!name) return;
+
+  const traits = ["INTJ", "INFP", "ENFJ", "ENTP", "ISTP", "ISFJ"];
+  const big5 = ["Openness ↑", "Conscientiousness ↓", "Extraversion ↑", "Agreeableness ↑", "Neuroticism ↓"];
+
+  const intel = `
+    <li>
+      <strong>${name}</strong> Analysis:
+      <br><em>MBTI:</em> ${traits[Math.floor(Math.random() * traits.length)]}
+      <br><em>Big Five:</em> ${big5.sort(() => 0.5 - Math.random()).slice(0, 3).join(", ")}
+    </li>
+  `;
+
+  document.getElementById('intel-list').innerHTML += intel;
+  document.getElementById('intel-name').value = "";
+}
+
+
 // Login success sound
 document.getElementById('login-form').addEventListener('submit', function (e) {
   e.preventDefault();
