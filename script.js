@@ -121,6 +121,7 @@ function renderProfiles() {
     const card = document.createElement("div");
     card.classList.add("profile-card");
     card.innerHTML = `
+      <img src="${profile.photo || 'assets/default-avatar.png'}" alt="Avatar" class="avatar"/>
       <h4>${profile.name}</h4>
       <p><strong>Role:</strong> ${profile.role}</p>
       <p><strong>Trait:</strong> ${profile.trait}</p>
