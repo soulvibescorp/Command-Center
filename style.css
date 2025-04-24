@@ -155,3 +155,12 @@ header {
   font-size: 14px;
   color: #ccc;
 }
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 10px #0ff;
+}
