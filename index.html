@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galactic Command Center</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- Background Video -->
+<video autoplay muted loop id="bg-video">
+  <source src="galaxy-bg.mp4" type="video/mp4" />
+</video>
+
+<!-- Login Page -->
+<div class="login-container" id="login-container">
+  <div class="login-panel">
+    <h1>Galactic Command</h1>
+    <p class="subtitle">Authorized Personnel Only</p>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Commander ID" required />
+      <input type="password" id="password" placeholder="Access Code" required />
+      <button type="submit">Enter Command</button>
+    </form>
+    <p id="login-error" class="error-message"></p>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard-container hidden" id="dashboard">
+  <header>
+    <img src="assets/logo.svg" alt="Galactic Logo" class="logo" />
+    <h2>Welcome, Commander <span id="commander-name"></span></h2>
+    <button id="logout-button">Logout</button>
+  </header>
+
+  <!-- Control Panel -->
+  <nav class="control-nav">
+    <button class="tab" data-tab="overview">Mission Overview</button>
+    <button class="tab" data-tab="intel">Behavioral Intel</button>
+    <button class="tab" data-tab="profiles">Crew Profiles</button>
+    <button class="tab" data-tab="settings">System Settings</button>
+  </nav>
+
+  <!-- Main Panels -->
+  <main>
+    <section id="overview" class="panel active">
+      <h3>Mission Status</h3>
+      <p>Systems nominal. Galaxy scanning in progress...</p>
+    </section>
+    
+    <section id="intel" class="panel">
+      <h3>Behavioral Intel</h3>
+      <p>Tracking personality traits and decision analysis.</p>
+      <ul id="intel-list"></ul>
+    </section>
+
+    <section id="profiles" class="panel">
+      <h3>Crew Member Profiles</h3>
+      <div id="profile-cards" class="profile-grid"></div>
+    </section>
+
+    <section id="settings" class="panel">
+      <h3>System Settings</h3>
+      <p>API Integration Coming Soon...</p>
+    </section>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
