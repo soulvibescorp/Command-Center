@@ -3,13 +3,13 @@ const USER = { username: "commander", password: "galaxy123" };
 
 // Mock personality traits
 const traits = ["Strategic Thinker", "Empath", "Rebel", "Visionary", "Analyzer"];
-const crewProfiles = [
+let crewProfiles = JSON.parse(localStorage.getItem("crewProfiles")) || [
   { name: "Lt. Orion", role: "Tactical Officer", trait: "Strategic Thinker" },
   { name: "Cmdr. Vega", role: "Pilot", trait: "Visionary" },
   { name: "Spec. Nova", role: "Engineer", trait: "Analyzer" },
 ];
 
-// DOM
+// DOM Elements
 const loginForm = document.getElementById("login-form");
 const loginContainer = document.getElementById("login-container");
 const dashboard = document.getElementById("dashboard");
@@ -21,31 +21,26 @@ const panels = document.querySelectorAll(".panel");
 const beepSound = document.getElementById("beep-sound");
 const accessSound = document.getElementById("access-sound");
 
+// Play sounds
 function playBeep() {
   beepSound.currentTime = 0;
   beepSound.play();
 }
-
 function playAccess() {
   accessSound.currentTime = 0;
   accessSound.play();
 }
 
-// Add sound on tab click
+// Tab click behavior
 tabs.forEach(tab => {
   tab.addEventListener("click", () => {
+    tabs.forEach(t => t.classList.remove("active"));
     panels.forEach(p => p.classList.remove("active"));
+    tab.classList.add("active");
     document.getElementById(tab.dataset.tab).classList.add("active");
     playBeep();
   });
 });
-
-// Login success
-if (user === USER.username && pass === USER.password) {
-  playAccess();
-  ...
-}
-
 
 // Login logic
 loginForm.addEventListener("submit", (e) => {
@@ -53,6 +48,7 @@ loginForm.addEventListener("submit", (e) => {
   const user = document.getElementById("username").value;
   const pass = document.getElementById("password").value;
   if (user === USER.username && pass === USER.password) {
+    playAccess();
     loginContainer.classList.add("hidden");
     dashboard.classList.remove("hidden");
     commanderName.textContent = user;
@@ -71,7 +67,7 @@ logoutBtn.addEventListener("click", () => {
   loginError.textContent = "";
 });
 
-// Tab Switching
+// Space-time fetcher
 function fetchSpaceTime() {
   fetch("https://worldtimeapi.org/api/timezone/Etc/UTC")
     .then(res => res.json())
@@ -82,17 +78,9 @@ function fetchSpaceTime() {
     })
     .catch(err => console.error("API Error:", err));
 }
-
 fetchSpaceTime();
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    panels.forEach(p => p.classList.remove("active"));
-    document.getElementById(tab.dataset.tab).classList.add("active");
-  });
-});
-
-// Render traits
+// Render intel traits
 function renderIntel() {
   const intelList = document.getElementById("intel-list");
   intelList.innerHTML = "";
@@ -103,17 +91,10 @@ function renderIntel() {
   });
 }
 
-// Render crew profiles
-let crewProfiles = JSON.parse(localStorage.getItem("crewProfiles")) || [
-  { name: "Lt. Orion", role: "Tactical Officer", trait: "Strategic Thinker" },
-  { name: "Cmdr. Vega", role: "Pilot", trait: "Visionary" },
-  { name: "Spec. Nova", role: "Engineer", trait: "Analyzer" },
-];
-
+// Save and render profiles
 function saveProfiles() {
   localStorage.setItem("crewProfiles", JSON.stringify(crewProfiles));
 }
-
 function renderProfiles() {
   const container = document.getElementById("profile-cards");
   container.innerHTML = "";
@@ -128,23 +109,11 @@ function renderProfiles() {
     `;
     container.appendChild(card);
   });
+  makeCardsDraggable();
   saveProfiles();
 }
 
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.panel').forEach(panel => panel.classList.remove('active'));
-
-    tab.classList.add('active');
-    const targetPanel = document.getElementById(tab.dataset.tab);
-    targetPanel.classList.add('active');
-
-    document.getElementById("beep-sound").play();
-  });
-});
-
-
+// Form submission for adding crew
 document.getElementById("crewForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const name = document.getElementById("crew-name").value;
@@ -152,58 +121,28 @@ document.getElementById("crewForm").addEventListener("submit", function (e) {
   const trait = document.getElementById("crew-trait").value;
   const photoInput = document.getElementById("crew-photo");
   const reader = new FileReader();
+
   reader.onloadend = () => {
     const newProfile = {
       name,
       role,
       trait,
-      photo: reader.result // base64 encoded image
+      photo: reader.result || null
     };
     crewProfiles.push(newProfile);
     saveProfiles();
     renderProfiles();
-    this.reset();
+    e.target.reset();
   };
 
   if (photoInput.files.length > 0) {
     reader.readAsDataURL(photoInput.files[0]);
   } else {
-    // If no photo, use default
-    reader.onloadend();
+    reader.onloadend(); // Run directly with no photo
   }
 });
 
-const cards = document.querySelectorAll('.profile-card');
-cards.forEach(card => {
-  card.setAttribute('draggable', true);
-  card.addEventListener('dragstart', (e) => {
-    e.dataTransfer.setData('text/plain', card.id);
-    card.style.opacity = '0.5';
-  });
-  card.addEventListener('dragend', () => {
-    card.style.opacity = '1';
-  });
-});
-
-const tabs = document.querySelectorAll('.tab');
-const panels = document.querySelectorAll('.panel');
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const targetId = tab.getAttribute('data-tab');
-    
-    panels.forEach(panel => {
-      if (panel.id === targetId) {
-        panel.classList.add('active');
-      } else {
-        panel.classList.remove('active');
-      }
-    });
-
-    document.getElementById('beep-sound').play();
-  });
-});
-
+// Make profile cards draggable
 function makeCardsDraggable() {
   const cards = document.querySelectorAll('.profile-card');
   cards.forEach(card => {
@@ -233,54 +172,6 @@ function makeCardsDraggable() {
         card.onmouseup = null;
       };
     };
-
     card.ondragstart = () => false;
   });
 }
-
-// Button click sound
-document.querySelectorAll('button, .tab').forEach(el => {
-  el.addEventListener('click', () => {
-    document.getElementById('beep-sound').play();
-  });
-
-  el.addEventListener('mouseover', () => {
-    document.getElementById('hover-sound').play();
-  });
-});
-
-function analyzePersonality() {
-  const name = document.getElementById('intel-name').value.trim();
-  if (!name) return;
-
-  const traits = ["INTJ", "INFP", "ENFJ", "ENTP", "ISTP", "ISFJ"];
-  const big5 = ["Openness ↑", "Conscientiousness ↓", "Extraversion ↑", "Agreeableness ↑", "Neuroticism ↓"];
-
-  const intel = `
-    <li>
-      <strong>${name}</strong> Analysis:
-      <br><em>MBTI:</em> ${traits[Math.floor(Math.random() * traits.length)]}
-      <br><em>Big Five:</em> ${big5.sort(() => 0.5 - Math.random()).slice(0, 3).join(", ")}
-    </li>
-  `;
-
-  document.getElementById('intel-list').innerHTML += intel;
-  document.getElementById('intel-name').value = "";
-}
-
-
-// Login success sound
-document.getElementById('login-form').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-
-  if (username === "admin" && password === "1234") {
-    document.getElementById('access-sound').play();
-    document.getElementById('login-container').classList.add('hidden');
-    document.getElementById('dashboard').classList.remove('hidden');
-    document.getElementById('commander-name').textContent = username;
-  } else {
-    document.getElementById('login-error').textContent = "Access Denied!";
-  }
-});
