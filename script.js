@@ -72,6 +72,19 @@ logoutBtn.addEventListener("click", () => {
 });
 
 // Tab Switching
+function fetchSpaceTime() {
+  fetch("https://worldtimeapi.org/api/timezone/Etc/UTC")
+    .then(res => res.json())
+    .then(data => {
+      const spaceTime = document.createElement("p");
+      spaceTime.textContent = `Galactic Time: ${data.datetime}`;
+      document.getElementById("overview").appendChild(spaceTime);
+    })
+    .catch(err => console.error("API Error:", err));
+}
+
+fetchSpaceTime();
+
 tabs.forEach(tab => {
   tab.addEventListener("click", () => {
     panels.forEach(p => p.classList.remove("active"));
