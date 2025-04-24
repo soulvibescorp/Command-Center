@@ -189,3 +189,33 @@ button#logout-button:hover {
 .profile-card {
   animation: floatEffect 3s ease-in-out infinite;
 }
+
+.control-nav {
+  display: flex;
+  overflow-x: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  gap: 20px;
+  scroll-snap-type: x mandatory;
+}
+
+.control-nav .tab {
+  background: transparent;
+  border: none;
+  font-family: 'Orbitron', sans-serif;
+  color: #0ff;
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+  scroll-snap-align: center;
+  white-space: nowrap;
+}
+
+.control-nav .tab:hover,
+.control-nav .tab.active {
+  transform: scale(1.2);
+  color: #fff;
+  border-bottom: 2px solid #0ff;
+}
