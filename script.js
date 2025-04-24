@@ -184,3 +184,22 @@ cards.forEach(card => {
     card.style.opacity = '1';
   });
 });
+
+const tabs = document.querySelectorAll('.tab');
+const panels = document.querySelectorAll('.panel');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const targetId = tab.getAttribute('data-tab');
+    
+    panels.forEach(panel => {
+      if (panel.id === targetId) {
+        panel.classList.add('active');
+      } else {
+        panel.classList.remove('active');
+      }
+    });
+
+    document.getElementById('beep-sound').play();
+  });
+});
