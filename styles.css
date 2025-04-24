@@ -317,3 +317,25 @@ body, html {
   box-shadow: 0 0 20px #0ff3;
   transition: all 0.5s ease;
 }
+
+.panel {
+  animation: floatPanel 8s infinite ease-in-out;
+}
+
+@keyframes floatPanel {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Add glowing edges to look holographic */
+.profile-card, .control-nav button {
+  border: 1px solid #0ff8;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 15px #0ff4;
+  transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+  transform: scale(1.03);
+}
