@@ -359,3 +359,48 @@ body, html {
   border-radius: 5px;
   transition: width 0.5s ease;
 }
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.crew-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #00ffff40;
+  border-radius: 10px;
+  text-align: center;
+  padding: 1rem;
+  color: #fff;
+  box-shadow: 0 0 15px #00f6ff60;
+  transition: transform 0.3s ease;
+}
+
+.crew-card:hover {
+  transform: scale(1.05);
+}
+
+.hologram-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #00f6ff;
+  box-shadow: 0 0 20px #00f6ff;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.trait {
+  display: inline-block;
+  background: #00f6ff20;
+  color: #0ff;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
