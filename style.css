@@ -230,3 +230,17 @@ button#logout-button:hover {
   color: #fff;
   border-bottom: 2px solid #0ff;
 }
+
+/* Tab transition effect */
+.panel {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: none;
+}
+
+.panel.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
