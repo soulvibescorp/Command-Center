@@ -130,3 +130,31 @@ function renderProfiles() {
   saveProfiles();
 }
 
+document.getElementById("crewForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const name = document.getElementById("crew-name").value;
+  const role = document.getElementById("crew-role").value;
+  const trait = document.getElementById("crew-trait").value;
+  const photoInput = document.getElementById("crew-photo");
+
+  const reader = new FileReader();
+  reader.onloadend = () => {
+    const newProfile = {
+      name,
+      role,
+      trait,
+      photo: reader.result // base64 encoded image
+    };
+    crewProfiles.push(newProfile);
+    saveProfiles();
+    renderProfiles();
+    this.reset();
+  };
+
+  if (photoInput.files.length > 0) {
+    reader.readAsDataURL(photoInput.files[0]);
+  } else {
+    // If no photo, use default
+    reader.onloadend();
+  }
+});
