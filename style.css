@@ -133,7 +133,18 @@ header {
   border: 1px solid #0ff;
   border-radius: 10px;
   text-align: center;
+  position: relative;
+  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+  animation: flicker 3s infinite alternate;
+  transform: perspective(1000px) rotateX(10deg);
 }
+
+@keyframes flicker {
+  0% { opacity: 0.9; }
+  50% { opacity: 1; transform: scale(1.02) rotateX(10deg); }
+  100% { opacity: 0.85; }
+}
+
 
 .profile-card h4 {
   margin-bottom: 10px;
