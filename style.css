@@ -273,3 +273,47 @@ button#logout-button:hover {
   50% { opacity: 1; transform: scale(1); }
   100% { opacity: 0; transform: scale(0.9); }
 }
+
+/* Make dashboard adaptable to small screens */
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .control-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .login-panel {
+    width: 90%;
+    padding: 2rem;
+  }
+}
+
+/* General design polish */
+body, html {
+  font-family: 'Orbitron', sans-serif;
+  color: #fff;
+  background-color: #000;
+  overflow-x: hidden;
+}
+
+.panel {
+  background: rgba(10, 10, 30, 0.8);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 1rem;
+  box-shadow: 0 0 20px #0ff3;
+  transition: all 0.5s ease;
+}
