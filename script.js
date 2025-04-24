@@ -63,6 +63,16 @@ function renderIntel() {
 }
 
 // Render crew profiles
+let crewProfiles = JSON.parse(localStorage.getItem("crewProfiles")) || [
+  { name: "Lt. Orion", role: "Tactical Officer", trait: "Strategic Thinker" },
+  { name: "Cmdr. Vega", role: "Pilot", trait: "Visionary" },
+  { name: "Spec. Nova", role: "Engineer", trait: "Analyzer" },
+];
+
+function saveProfiles() {
+  localStorage.setItem("crewProfiles", JSON.stringify(crewProfiles));
+}
+
 function renderProfiles() {
   const container = document.getElementById("profile-cards");
   container.innerHTML = "";
@@ -76,4 +86,6 @@ function renderProfiles() {
     `;
     container.appendChild(card);
   });
+  saveProfiles();
 }
+
