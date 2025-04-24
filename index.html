@@ -58,10 +58,6 @@
         <input type="text" id="intel-name" placeholder="Crew Name" />
         <button onclick="analyzePersonality()">Analyze</button>
       </div>
-      <h4>Analytics Integrations:</h4>
-      <div id="analytics-info">
-        <p><strong>Behavioral Data:</strong> Loading...</p>
-      </div>
     </section>
 
     <section id="settings" class="panel">
@@ -131,20 +127,7 @@ function analyzePersonality() {
     const traitMatrix = document.getElementById('trait-matrix');
     traitMatrix.innerHTML = traits.map(trait => `<div class="trait">${trait}</div>`).join('');
     playSound('access-sound');
-    updateBehavioralIntel(crewName); // Trigger behavioral analytics integration
   }
-}
-
-// Update Behavioral Intel with Integrated Data
-function updateBehavioralIntel(crewName) {
-  // Here you'd integrate with the APIs of the mentioned tools (e.g., Google Analytics, Mixpanel)
-  // For example, if integrating with Mixpanel:
-  // mixpanel.track("Analyze Personality", { crewName: crewName });
-
-  document.getElementById('analytics-info').innerHTML = `
-    <p><strong>Behavioral Data for ${crewName}:</strong></p>
-    <p>Data is being analyzed... (Connect API for real-time insights)</p>
-  `;
 }
 
 // Display Sensor Data
