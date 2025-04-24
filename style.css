@@ -183,7 +183,6 @@ button#logout-button:hover {
   box-shadow: 0 0 20px #0ff;
 }
 
-
 .profile-card img {
   width: 100px;
   height: 100px;
@@ -217,6 +216,7 @@ button#logout-button:hover {
   animation: floatEffect 3s ease-in-out infinite;
 }
 
+/* Control Navigation Styles */
 .control-nav {
   display: flex;
   overflow-x: auto;
@@ -259,4 +259,17 @@ button#logout-button:hover {
   display: block;
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Sensor Status Styles */
+#sensor-status p {
+  color: #0ff;
+  font-weight: bold;
+  animation: fadePulse 1.5s ease-in-out;
+}
+
+@keyframes fadePulse {
+  0% { opacity: 0; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.9); }
 }
