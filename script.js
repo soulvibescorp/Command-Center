@@ -237,3 +237,30 @@ function makeCardsDraggable() {
     card.ondragstart = () => false;
   });
 }
+
+// Button click sound
+document.querySelectorAll('button, .tab').forEach(el => {
+  el.addEventListener('click', () => {
+    document.getElementById('beep-sound').play();
+  });
+
+  el.addEventListener('mouseover', () => {
+    document.getElementById('hover-sound').play();
+  });
+});
+
+// Login success sound
+document.getElementById('login-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  if (username === "admin" && password === "1234") {
+    document.getElementById('access-sound').play();
+    document.getElementById('login-container').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+    document.getElementById('commander-name').textContent = username;
+  } else {
+    document.getElementById('login-error').textContent = "Access Denied!";
+  }
+});
