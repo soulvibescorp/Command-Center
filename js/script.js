@@ -1,295 +1,41 @@
-// Dummy login
-const USER = { username: "commander", password: "galaxy123" };
+// 1. Load mock space weather data
+function loadMockSpaceWeather() {
+  const solarFlare = ["Low", "Moderate", "High", "Extreme"];
+  const geomagnetic = ["Quiet", "Unsettled", "Active", "Storm"];
 
-// Mock personality traits
-const traits = ["Strategic Thinker", "Empath", "Rebel", "Visionary", "Analyzer"];
-let crewProfiles = JSON.parse(localStorage.getItem("crewProfiles")) || [
-  { name: "Lt. Orion", role: "Tactical Officer", trait: "Strategic Thinker" },
-  { name: "Cmdr. Vega", role: "Pilot", trait: "Visionary" },
-  { name: "Spec. Nova", role: "Engineer", trait: "Analyzer" },
-];
-
-// DOM Elements
-const loginForm = document.getElementById("login-form");
-const loginContainer = document.getElementById("login-container");
-const dashboard = document.getElementById("dashboard");
-const loginError = document.getElementById("login-error");
-const commanderName = document.getElementById("commander-name");
-const logoutBtn = document.getElementById("logout-button");
-const tabs = document.querySelectorAll(".tab");
-const panels = document.querySelectorAll(".panel");
-const beepSound = document.getElementById("beep-sound");
-const accessSound = document.getElementById("access-sound");
-
-// Play sounds
-function playBeep() {
-  beepSound.currentTime = 0;
-  beepSound.play();
-}
-function playAccess() {
-  accessSound.currentTime = 0;
-  accessSound.play();
+  document.getElementById("solar-flare").textContent =
+    solarFlare[Math.floor(Math.random() * solarFlare.length)];
+  document.getElementById("geomagnetic").textContent =
+    geomagnetic[Math.floor(Math.random() * geomagnetic.length)];
 }
 
-// Tab click behavior
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    panels.forEach(p => p.classList.remove("active"));
-    tab.classList.add("active");
-    document.getElementById(tab.dataset.tab).classList.add("active");
-    playBeep();
-  });
-});
+// 2. Draw canvas star map
+function drawStarMap() {
+  const canvas = document.getElementById("star-map");
+  const ctx = canvas.getContext("2d");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-// Login logic
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
-  if (user === USER.username && pass === USER.password) {
-    playAccess();
-    loginContainer.classList.add("hidden");
-    dashboard.classList.remove("hidden");
-    commanderName.textContent = user;
-    renderIntel();
-    renderProfiles();
-  } else {
-    loginError.textContent = "Access Denied.";
+  for (let i = 0; i < 100; i++) {
+    let x = Math.random() * canvas.width;
+    let y = Math.random() * canvas.height;
+    let radius = Math.random() * 1.5;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fillStyle = "white";
+    ctx.fill();
   }
-});
 
-// Logout
-logoutBtn.addEventListener("click", () => {
-  loginContainer.classList.remove("hidden");
-  dashboard.classList.add("hidden");
-  loginForm.reset();
-  loginError.textContent = "";
-});
-
-// Space-time fetcher
-function fetchSpaceTime() {
-  fetch("https://worldtimeapi.org/api/timezone/Etc/UTC")
-    .then(res => res.json())
-    .then(data => {
-      const spaceTime = document.createElement("p");
-      spaceTime.textContent = `Galactic Time: ${data.datetime}`;
-      document.getElementById("overview").appendChild(spaceTime);
-    })
-    .catch(err => console.error("API Error:", err));
-}
-fetchSpaceTime();
-
-// Render intel traits
-function renderIntel() {
-  const intelList = document.getElementById("intel-list");
-  intelList.innerHTML = "";
-  traits.forEach(trait => {
-    const li = document.createElement("li");
-    li.textContent = trait;
-    intelList.appendChild(li);
-  });
-}
-
-// Save and render profiles
-function saveProfiles() {
-  localStorage.setItem("crewProfiles", JSON.stringify(crewProfiles));
-}
-function renderProfiles() {
-  const container = document.getElementById("profile-cards");
-  container.innerHTML = "";
-  crewProfiles.forEach(profile => {
-    const card = document.createElement("div");
-    card.classList.add("profile-card");
-    card.innerHTML = `
-      <img src="${profile.photo || 'assets/default-avatar.png'}" alt="Avatar" class="avatar"/>
-      <h4>${profile.name}</h4>
-      <p><strong>Role:</strong> ${profile.role}</p>
-      <p><strong>Trait:</strong> ${profile.trait}</p>
-    `;
-    container.appendChild(card);
-  });
-  makeCardsDraggable();
-  saveProfiles();
-}
-
-const crewMembers = [
-  { name: "Zara Voss", role: "Tactical Lead", trait: "Strategist", photo: "assets/crew1.png" },
-  { name: "Kai Orion", role: "Pilot", trait: "Fearless", photo: "assets/crew2.png" },
-  { name: "Nova Reed", role: "Engineer", trait: "Innovator", photo: "assets/crew3.png" }
-];
-
-function displayCrew() {
-  const container = document.getElementById("profile-cards");
-  container.innerHTML = "";
-  crewMembers.forEach(member => {
-    const card = document.createElement("div");
-    card.className = "crew-card floating";
-    card.innerHTML = `
-      <img src="${member.photo}" alt="${member.name}" class="hologram-img" />
-      <h4>${member.name}</h4>
-      <p>${member.role}</p>
-      <span class="trait">${member.trait}</span>
-    `;
-    container.appendChild(card);
-  });
-}
-
-displayCrew();
-
-
-// Form submission for adding crew
-document.getElementById("crewForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-  const name = document.getElementById("crew-name").value;
-  const role = document.getElementById("crew-role").value;
-  const trait = document.getElementById("crew-trait").value;
-  const photoInput = document.getElementById("crew-photo");
-  const reader = new FileReader();
-
-  reader.onloadend = () => {
-    const newProfile = {
-      name,
-      role,
-      trait,
-      photo: reader.result || null
-    };
-    saveCrewProfile(newProfile);
-    displayCrewProfiles();
-    e.target.reset();
-  };
-
-  if (photoInput.files.length > 0) {
-    reader.readAsDataURL(photoInput.files[0]);
-  } else {
-    reader.onloadend();
+  // Add constellation lines
+  ctx.strokeStyle = "#0ff5";
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i < 10; i++) {
+    let x1 = Math.random() * canvas.width;
+    let y1 = Math.random() * canvas.height;
+    let x2 = x1 + Math.random() * 100;
+    let y2 = y1 + Math.random() * 100;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
   }
-});
-
-// Make profile cards draggable
-function makeCardsDraggable() {
-  const cards = document.querySelectorAll('.profile-card');
-  cards.forEach(card => {
-    card.onmousedown = function (e) {
-      let shiftX = e.clientX - card.getBoundingClientRect().left;
-      let shiftY = e.clientY - card.getBoundingClientRect().top;
-
-      card.style.position = 'absolute';
-      card.style.zIndex = 1000;
-      document.body.append(card);
-
-      function moveAt(pageX, pageY) {
-        card.style.left = pageX - shiftX + 'px';
-        card.style.top = pageY - shiftY + 'px';
-      }
-
-      moveAt(e.pageX, e.pageY);
-
-      function onMouseMove(event) {
-        moveAt(event.pageX, event.pageY);
-      }
-
-      document.addEventListener('mousemove', onMouseMove);
-
-      card.onmouseup = function () {
-        document.removeEventListener('mousemove', onMouseMove);
-        card.onmouseup = null;
-      };
-    };
-    card.ondragstart = () => false;
-  });
 }
-
-// Save crew profile with encryption
-function saveCrewProfile(profile) {
-  let crew = [];
-  const encrypted = localStorage.getItem("crew");
-  if (encrypted) {
-    const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
-    const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-    crew = JSON.parse(decryptedData);
-  }
-  crew.push(profile);
-  const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(crew), "GalacticSecret").toString();
-  localStorage.setItem("crew", ciphertext);
-}
-
-// Display crew profiles with decryption
-function displayCrewProfiles() {
-  const encrypted = localStorage.getItem("crew");
-  if (!encrypted) return;
-  const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
-  const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
-  const crew = JSON.parse(decryptedData);
-  const container = document.getElementById("profile-cards");
-  container.innerHTML = "";
-  crew.forEach(member => {
-    const card = document.createElement("div");
-    card.className = "profile-card";
-    card.innerHTML = `
-      ${member.photo ? `<img src="${member.photo}" alt="Crew Photo"/>` : ""}
-      <h4>${member.name}</h4>
-      <p><strong>Role:</strong> ${member.role}</p>
-      <p><strong>Trait:</strong> ${member.trait}</p>
-    `;
-    container.appendChild(card);
-  });
-}
-
-// Optional: Run this instead of renderProfiles() on load if switching data source
-window.onload = displayCrewProfiles;
-
-// Add random alert system
-function randomAlert() {
-  const statuses = [
-    "🛑 Cosmic radiation spike!",
-    "✅ All systems nominal.",
-    "⚠️ Wormhole proximity alert!",
-    "🔍 Scanning unknown object...",
-    "📡 Signal interference detected."
-  ];
-
-  const sensor = document.getElementById("sensor-status");
-  const alert = statuses[Math.floor(Math.random() * statuses.length)];
-
-  sensor.innerHTML = `<p>${alert}</p>`;
-  sensor.classList.add("flashing");
-
-  setTimeout(() => sensor.classList.remove("flashing"), 1500);
-}
-
-// Simulate alert every 10 seconds
-setInterval(randomAlert, 10000);
-function downloadCrewLog() {
-  const encrypted = localStorage.getItem("crew");
-  if (!encrypted) return alert("No crew data to download.");
-
-  const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
-  const data = bytes.toString(CryptoJS.enc.Utf8);
-  
-  const blob = new Blob([data], { type: "application/json" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "mission-log.json";
-  link.click();
-}
-const traits = [
-  { name: "Courage", value: 82 },
-  { name: "Leadership", value: 95 },
-  { name: "Empathy", value: 76 },
-  { name: "Tactical Thinking", value: 89 }
-];
-
-function displayTraitMatrix() {
-  const matrix = document.getElementById('trait-matrix');
-  matrix.innerHTML = '';
-  traits.forEach(trait => {
-    const bar = document.createElement('div');
-    bar.className = 'trait-bar';
-    bar.innerHTML = `<span>${trait.name}</span>
-                     <div class="bar-fill" style="width:${trait.value}%">${trait.value}%</div>`;
-    matrix.appendChild(bar);
-  });
-}
-
-displayTraitMatrix();
