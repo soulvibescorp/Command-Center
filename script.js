@@ -235,3 +235,16 @@ function randomAlert() {
 
 // Simulate alert every 10 seconds
 setInterval(randomAlert, 10000);
+function downloadCrewLog() {
+  const encrypted = localStorage.getItem("crew");
+  if (!encrypted) return alert("No crew data to download.");
+
+  const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
+  const data = bytes.toString(CryptoJS.enc.Utf8);
+  
+  const blob = new Blob([data], { type: "application/json" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "mission-log.json";
+  link.click();
+}
