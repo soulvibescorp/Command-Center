@@ -51,54 +51,149 @@
   <h3>Behavioral Intel</h3>
   <p>Analyzing traits, skills, and decisions via AI Core Systems</p>
 
-  <!-- Netflix-style Container -->
-  <div class="intel-dashboard">
+  <!-- Tab Navigation -->
+  <div class="intel-tabs">
+    <button class="intel-tab-button active" data-intel-tab="overview-intel">Overview</button>
+    <button class="intel-tab-button" data-intel-tab="google-analytics">Google Analytics</button>
+    <button class="intel-tab-button" data-intel-tab="mixpanel">Mixpanel</button>
+    <button class="intel-tab-button" data-intel-tab="amplitude">Amplitude</button>
+    <button class="intel-tab-button" data-intel-tab="hotjar">Hotjar</button>
+    <button class="intel-tab-button" data-intel-tab="heatmaps">Heatmaps</button>
+  </div>
 
-    <!-- Section 1: Personality Matrix -->
-    <div class="intel-row">
-      <h4>AI Personality Matrix</h4>
-      <div class="intel-slider">
-        <div class="intel-card">Curiosity</div>
-        <div class="intel-card">Risk-Taking</div>
-        <div class="intel-card">Leadership</div>
-        <div class="intel-card">Stress Resistance</div>
-      </div>
+  <!-- Tab Content -->
+  <div class="intel-tab-content active" id="overview-intel">
+    <h4>AI Personality Matrix</h4>
+    <div class="intel-slider">
+      <div class="intel-card">Curiosity</div>
+      <div class="intel-card">Risk-Taking</div>
+      <div class="intel-card">Leadership</div>
+      <div class="intel-card">Stress Resistance</div>
     </div>
 
-    <!-- Section 2: Skill Breakdown -->
-    <div class="intel-row">
-      <h4>Skill Set Radar</h4>
-      <div class="intel-slider">
-        <div class="intel-card">Hacking</div>
-        <div class="intel-card">Piloting</div>
-        <div class="intel-card">Engineering</div>
-        <div class="intel-card">Negotiation</div>
-      </div>
+    <h4>Skill Set Radar</h4>
+    <div class="intel-slider">
+      <div class="intel-card">Hacking</div>
+      <div class="intel-card">Piloting</div>
+      <div class="intel-card">Engineering</div>
+      <div class="intel-card">Negotiation</div>
     </div>
 
-    <!-- Section 3: Decision Logs -->
-    <div class="intel-row">
-      <h4>Recent Decisions</h4>
-      <div class="intel-slider">
-        <div class="intel-card">Initiated Protocol Delta</div>
-        <div class="intel-card">Bypassed Firewall</div>
-        <div class="intel-card">Authorized Jump Drive</div>
-        <div class="intel-card">Refused Mission Override</div>
-      </div>
+    <h4>Recent Decisions</h4>
+    <div class="intel-slider">
+      <div class="intel-card">Initiated Protocol Delta</div>
+      <div class="intel-card">Bypassed Firewall</div>
+      <div class="intel-card">Authorized Jump Drive</div>
+      <div class="intel-card">Refused Mission Override</div>
     </div>
 
-    <!-- Section 4: Intel Input -->
-    <div class="intel-row">
-      <h4>Analyze a Crew Member</h4>
-      <div class="intel-input">
-        <input type="text" id="intel-name" placeholder="Enter Crew Name..." />
-        <button onclick="analyzePersonality()">Analyze</button>
-      </div>
-      <div id="trait-matrix" class="trait-matrix"></div>
+    <h4>Analyze a Crew Member</h4>
+    <div class="intel-input">
+      <input type="text" id="intel-name" placeholder="Enter Crew Name..." />
+      <button onclick="analyzePersonality()">Analyze</button>
     </div>
+    <div id="trait-matrix" class="trait-matrix"></div>
+  </div>
 
+  <div class="intel-tab-content" id="google-analytics">
+    <h4>Google Analytics</h4>
+    <!-- Embed example GA Dashboard or tutorial -->
+    <p>Use your GA4 Measurement ID and embed visual reports from GA interface or custom API visualizations.</p>
+    <code>Example Script Snippet:</code>
+    <pre>&lt;script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"&gt;&lt;/script&gt;
+&lt;script&gt;
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+&lt;/script&gt;</pre>
+  </div>
+
+  <div class="intel-tab-content" id="mixpanel">
+    <h4>Mixpanel Analytics</h4>
+    <pre>&lt;script type="text/javascript"&gt;
+  (function(f,b){
+    if(!b.__SV){var e,g,i,h;window.mixpanel=b;b._i=[];b.init=function(e,f,c){
+      function g(a,d){
+        var b=d.split(".");
+        2==b.length&&(a=a[b[0]],d=b[1]);
+        a[d]=function(){
+          a.push([d].concat(Array.prototype.slice.call(arguments,0)))
+        }
+      }
+      var a=b;"undefined"!==typeof c?a=b[c]=[]:c="mixpanel";
+      a.people=a.people||[];a.toString=function(a){var d="mixpanel";"mixpanel"!==c&&(d+="."+c);
+      a||(d+=" (stub)");return d};
+      a.people.toString=function(){return a.toString(1)+".people (stub)"};
+      i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+      for(h=0;h<i.length;h++)g(a,i[h]);
+      b._i.push([e,f,c])
+    };
+    b.__SV=1.2;e=f.createElement("script");
+    e.type="text/javascript";e.async=!0;e.src="https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";
+    g=f.getElementsByTagName("script")[0];g.parentNode.insertBefore(e,g)
+  }})(document,window.mixpanel||[]);
+  mixpanel.init("YOUR_TOKEN");
+&lt;/script&gt;</pre>
+  </div>
+
+  <div class="intel-tab-content" id="amplitude">
+    <h4>Amplitude Analytics</h4>
+    <pre>&lt;script type="text/javascript"&gt;
+  (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
+  ;r.type="text/javascript";r.async=true;
+  r.src="https://cdn.amplitude.com/libs/amplitude-8.5.0-min.gz.js";
+  r.onload=function(){
+    if(e.amplitude.runQueuedFunctions){
+      e.amplitude.runQueuedFunctions()
+    }else{
+      console.log("[Amplitude] Error: could not load SDK")
+    }
+  };
+  var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i);
+  function s(e,t){
+    e.prototype[t]=function(){
+      this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this
+    }
+  }
+  var o=function(){this._q=[];return this};
+  var a=["add","append","clearAll","prepend","set","setOnce","unset"];
+  for(var c=0;c<a.length;c++){s(o,a[c])}n.Identify=o;
+  var u=function(){this._q=[];return this};
+  var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"];
+  for(var p=0;p<l.length;p++){s(u,l[p])}n.Revenue=u;
+  var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut",
+  "setVersionName","setDomain","setDeviceId","enableTracking","setGlobalUserProperties",
+  "identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId",
+  "groupIdentify","onInit","logEventWithTimestamp","logEventWithGroups","setSessionId",
+  "resetSessionId"];
+  function v(e){
+    function t(t){
+      e[t]=function(){
+        e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))
+      }
+    }
+    for(var n=0;n<d.length;n++){t(d[n])}
+  }
+  v(n);
+  e.amplitude=n;
+})(window,document);
+
+amplitude.getInstance().init("AMPLITUDE_API_KEY");
+&lt;/script&gt;</pre>
+  </div>
+
+  <div class="intel-tab-content" id="hotjar">
+    <h4>Hotjar</h4>
+    <iframe src="https://insights.hotjar.com/sites/XXXXX/dashboard" width="100%" height="600" frameborder="0"></iframe>
+  </div>
+
+  <div class="intel-tab-content" id="heatmaps">
+    <h4>Heatmap Sample</h4>
+    <iframe src="https://example.com/embed/heatmap" width="100%" height="600" frameborder="0"></iframe>
   </div>
 </section>
+
 
 
     <section id="settings" class="panel">
