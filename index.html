@@ -1,33 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Galactic Command Center</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-<!-- Background Video -->
-<video autoplay muted loop id="bg-video">
-  <source src="galaxy-bg.mp4" type="video/mp4" />
-</video>
-
-<!-- Login Page -->
-<div class="login-container" id="login-container">
-  <div class="login-panel">
-    <h1>Galactic Command</h1>
-    <p class="subtitle">Authorized Personnel Only</p>
-    <form id="login-form">
-      <input type="text" id="username" placeholder="Commander ID" required />
-      <input type="password" id="password" placeholder="Access Code" required />
-      <button type="submit">Enter Command</button>
-    </form>
-    <p id="login-error" class="error-message"></p>
-  </div>
-</div>
-
 <!-- Dashboard -->
 <div class="dashboard-container hidden" id="dashboard">
   <header>
@@ -46,6 +16,12 @@
     <audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
   </nav>
 
+  <!-- Sensor Alerts Section -->
+  <div id="sensor-alerts">
+    <h4>Sensor Readings:</h4>
+    <div id="sensor-status"></div>
+  </div>
+
   <!-- Main Panels -->
   <main>
     <section id="overview" class="panel active">
@@ -58,11 +34,10 @@
       <p>Tracking personality traits and decision analysis.</p>
       <ul id="intel-list"></ul>
       <div class="intel-form">
-  <input type="text" id="intel-name" placeholder="Crew Name" />
-  <button onclick="analyzePersonality()">Analyze</button>
-</div>
-<ul id="intel-list"></ul>
-
+        <input type="text" id="intel-name" placeholder="Crew Name" />
+        <button onclick="analyzePersonality()">Analyze</button>
+      </div>
+      <ul id="intel-list"></ul>
     </section>
 
     <section id="profiles" class="panel">
@@ -76,26 +51,3 @@
     </section>
   </main>
 </div>
-
-<!-- Crew Registration Form -->
-<div id="crew-register" class="tab-panel">
-  <h3>Register New Crew Member</h3>
-  <form id="crewForm">
-    <input type="text" id="crew-name" placeholder="Name" required />
-    <input type="text" id="crew-role" placeholder="Role" required />
-    <input type="text" id="crew-trait" placeholder="Trait" required />
-    <input type="file" id="crew-photo" accept="image/*" />
-    <button type="submit">Add Crew</button>
-  </form>
-  <div id="profile-cards"></div>
-</div>
-
-<script src="script.js"></script>
-<canvas id="galaxy-bg"></canvas>
-<script src="scripts/stars.js"></script>
-<audio id="beep-sound" src="assets/click-beep.mp3" preload="auto"></audio>
-<audio id="hover-sound" src="assets/hover-bleep.mp3" preload="auto"></audio>
-<audio id="access-sound" src="assets/access-granted.mp3" preload="auto"></audio>
-
-</body>
-</html>
