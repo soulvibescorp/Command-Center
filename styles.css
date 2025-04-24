@@ -26,6 +26,58 @@ header h2 {
   font-size: 24px;
 }
 
+<style>
+.intel-tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.intel-tool-tab {
+  padding: 10px 15px;
+  background: #222;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.intel-tool-tab.active,
+.intel-tool-tab:hover {
+  background: #007bff;
+}
+
+.intel-search {
+  margin: 15px 0;
+}
+
+.intel-search input {
+  padding: 8px;
+  width: 300px;
+  max-width: 100%;
+  margin-right: 8px;
+}
+
+.intel-search button {
+  padding: 8px 12px;
+  background: #007bff;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.intel-tab-panel {
+  display: none;
+}
+
+.intel-tab-panel.active {
+  display: block;
+}
+</style>
+
 header .btn {
   background-color: #0ff;
   border: none;
