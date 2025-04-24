@@ -1,3 +1,7 @@
+<!-- Include CryptoJS for AES encryption -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+<script>
 // Dummy login
 const USER = { username: "commander", password: "galaxy123" };
 
@@ -176,15 +180,25 @@ function makeCardsDraggable() {
   });
 }
 
-// Extra functions added from your snippet:
+// Save Crew Profile with Encryption
 function saveCrewProfile(profile) {
   let crew = JSON.parse(localStorage.getItem("crew")) || [];
   crew.push(profile);
-  localStorage.setItem("crew", JSON.stringify(crew));
+
+  // Encrypt
+  const ciphertext = CryptoJS.AES.encrypt(JSON.stringify(crew), "GalacticSecret").toString();
+  localStorage.setItem("crew", ciphertext);
 }
 
+// Display Crew Profiles with Decryption
 function displayCrewProfiles() {
-  const crew = JSON.parse(localStorage.getItem("crew")) || [];
+  const encrypted = localStorage.getItem("crew");
+  if (!encrypted) return;
+
+  const bytes = CryptoJS.AES.decrypt(encrypted, "GalacticSecret");
+  const decryptedData = bytes.toString(CryptoJS.enc.Utf8);
+  const crew = JSON.parse(decryptedData);
+
   const container = document.getElementById("profile-cards");
   container.innerHTML = "";
 
@@ -226,3 +240,4 @@ function randomAlert() {
 
 // Simulate alert every 10 seconds
 setInterval(randomAlert, 10000);
+</script>
