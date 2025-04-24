@@ -358,6 +358,34 @@ initializeVisualizer();
   });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// === Tab Switching Logic ===
+document.querySelectorAll(".intel-tool-tab").forEach(button => {
+  button.addEventListener("click", () => {
+    const target = button.dataset.tab;
+
+    // Remove active from all tabs and panels
+    document.querySelectorAll(".intel-tool-tab").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".intel-tab-panel").forEach(panel => panel.classList.remove("active"));
+
+    // Activate selected tab and panel
+    button.classList.add("active");
+    document.getElementById(target).classList.add("active");
+  });
+});
+
+// === Simple Search Logic (Future AI Integration Placeholder) ===
+function searchAnalytics() {
+  const query = document.getElementById("analytics-search").value.trim().toLowerCase();
+  if (!query) {
+    alert("Please enter a search term.");
+    return;
+  }
+
+  // Mock response (replace this with real filtering or AI assistant search)
+  alert("Searching for: " + query + "\n\n[Note: Smart analytics search coming soon!]");
+}
+</script>
 
 </body>
 </html>
